@@ -17,7 +17,7 @@ class Users extends Model {
    * @param {string} attempted - The attempted password.
    * @param {string} password - The hashed password from when the user signed up.
    * @param {string} salt - The salt generated when the user signed up.
-   * @returns {boolean} A boolean indicating if the attempted password was correct.
+   * @returns {boolean} A boolean indicating if ?the attempted password was correct.
    */
   compare(attempted, password, salt) {
     return utils.compareHash(attempted, password, salt);
@@ -41,7 +41,7 @@ class Users extends Model {
       salt,
       password: utils.createHash(password, salt)
     };
-
+    console.log('new user is: ', newUser);
     return super.create.call(this, newUser);
   }
 }

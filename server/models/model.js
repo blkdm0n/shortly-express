@@ -38,6 +38,7 @@ class Model {
     }
     let parsedOptions = parseData(options);
     let queryString = `SELECT * FROM ${this.tablename} WHERE ${parsedOptions.string.join(' AND ')}`;
+    
     return executeQuery(queryString, parsedOptions.values);
   }
 
@@ -53,6 +54,8 @@ class Model {
   get(options) {
     let parsedOptions = parseData(options);
     let queryString = `SELECT * FROM ${this.tablename} WHERE ${parsedOptions.string.join(' AND ')} LIMIT 1`;
+    console.log("string", parsedOptions.values);
+    console.log(options);
     return executeQuery(queryString, parsedOptions.values).then(results => results[0]);
   }
 
