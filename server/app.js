@@ -19,7 +19,45 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', 
 (req, res) => {
-  res.render('index');
+  res.render('login');
+});
+
+//post request for new signups
+app.post('/signup', (req, res) => {
+  //uses create to add user to database and hash password
+  models.Users.create(req.body);
+});
+
+app.post('/login', (req, res) => {
+  // res.render('login');
+  // req.on('click', res.)
+  
+  //if user doesn't enter a username and password -> res.render('signup')
+  //else we need to check user table for password 
+  if (!req.body.username && !req.body.password) {
+    console.log('redirecting');
+    res.render('signup');
+  } else {
+    //check the user table to see if user is found
+    // console.log('hello: ', models.Users.getAll(req.body));
+    if (models.Users.getAll(req)) {
+      res.render('index');
+      console.log('this is req,body: ', req.body);
+    } else {
+      res.render('signup');
+    }
+  }
+  //models.Users.getAll(req.body);
+
+  
+  // var tempPW = models.Users.get()
+  
+  // models.Users.compare(req.body.password)
+  
+  
+  
+  
+  
 });
 
 app.get('/create', 
